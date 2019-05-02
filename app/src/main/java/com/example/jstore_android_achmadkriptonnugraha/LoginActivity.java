@@ -19,8 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-    final String constEmail = "test@test.com";
-    final String constPassword = "test";
+//    final String constEmail = "test@test.com";
+//    final String constPassword = "test";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                             if (jsonResponse != null) {
                                 AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
                                 builder1.setMessage("Login Success").create().show();
+                                Intent regisIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(regisIntent);
                             }
                         }
                         catch (JSONException e)
