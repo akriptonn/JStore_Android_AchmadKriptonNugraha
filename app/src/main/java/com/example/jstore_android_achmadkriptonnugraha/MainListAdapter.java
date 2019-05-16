@@ -4,7 +4,6 @@ import android.widget.BaseExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -13,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 //import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import com.example.jstore_android_achmadkriptonnugraha.model.Item;
+import com.example.jstore_android_achmadkriptonnugraha.model.Supplier;
 
 public class MainListAdapter extends BaseExpandableListAdapter {
     private Context _context;

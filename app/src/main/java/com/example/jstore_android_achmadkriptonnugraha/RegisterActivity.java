@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.jstore_android_achmadkriptonnugraha.RequestActivity.RegisterRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
                             {
                                 AlertDialog.Builder builder1 = new AlertDialog.Builder(RegisterActivity.this);
                                 builder1.setMessage("Register Success").create().show();
+                            }else{
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(RegisterActivity.this);
+                                builder1.setMessage("Register Failed").create().show();
                             }
                         }catch (JSONException e)
                         {

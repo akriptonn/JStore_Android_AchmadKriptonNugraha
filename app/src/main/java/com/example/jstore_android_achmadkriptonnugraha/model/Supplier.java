@@ -1,4 +1,6 @@
-package com.example.jstore_android_achmadkriptonnugraha;
+package com.example.jstore_android_achmadkriptonnugraha.model;
+
+import com.example.jstore_android_achmadkriptonnugraha.model.Location;
 
 public class Supplier {
     private int id;

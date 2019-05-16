@@ -1,4 +1,4 @@
-package com.example.jstore_android_achmadkriptonnugraha;
+package com.example.jstore_android_achmadkriptonnugraha.model;
 
 public class Location {
     private String province;

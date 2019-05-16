@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">JStore_Android_AchmadKriptonNugraha</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_buat_pesanan">BuatPesananActivity</string>
+    <string name="tombol_pesanan">Pesanan</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">
+        android.support.design.widget.AppBarLayout$ScrollingViewBehavior
+    </string>
 </resources>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/groupHeader"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textColor="#F9F93D"
+        android:textColor="#070e30"
         android:textSize="17dp"
         />
 
