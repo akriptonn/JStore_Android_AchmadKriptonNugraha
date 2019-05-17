@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         currentUserId = getIntent().getExtras().getInt("id_customer");
-        final Button pesanan = (Button) findViewById(R.id.pesanan);
-        final Button history = findViewById(R.id.history);
+        final ImageView pesanan =  findViewById(R.id.pesanan);
+        final ImageView history = findViewById(R.id.history);
 
         pesanan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("id_customer", currentUserId);
                 Gson gson = new Gson();
                 i.putExtra("Item", gson.toJson(selected, Item.class));
+                i.putExtra("name_customer", getIntent().getExtras().getString("name_customer"));
                 startActivity(i);
                 return true;
             }

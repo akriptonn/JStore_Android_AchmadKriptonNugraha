@@ -36,7 +36,6 @@ public class HistoryCustomerActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private InvoiceAdapter adapter;
     private ArrayList<Invoice> invoiceArrayList;
-    private ArrayList<Item> itemList;
     private int currentUserId;
 
     private ImageView buttonBack;
@@ -72,10 +71,26 @@ public class HistoryCustomerActivity extends AppCompatActivity {
         listenerChildRecycler = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+                int position = viewHolder.getAdapterPosition();
                 Intent i = new Intent(HistoryCustomerActivity.this, ShowInvoiceActivity.class);
                 i.putExtra("id_customer", currentUserId);
                 i.putExtra("name_customer", getIntent().getExtras().getString("name_customer"));
+                i.putExtra("invoiceType", invoiceArrayList.get(position).getINVOICE_TYPE());
+                i.putExtra("invoiceDate", invoiceArrayList.get(position).getDate());
+                i.putExtra("invoiceId", invoiceArrayList.get(position).getId());
+                i.putExtra("invoiceStatus", invoiceArrayList.get(position).getINVOICE_STATUS());
+                i.putExtra("totalPrice", invoiceArrayList.get(position).getTotalPrice());
+
+                if (invoiceArrayList.get(position).getINVOICE_STATUS().equals("Installment")) {
+                    Sell_Installment si = (Sell_Installment) invoiceArrayList.get(position);
+                    i.putExtra("installmentPeriod", Integer.toString(si.getInstallmentPeriod()));
+                }else if (invoiceArrayList.get(position).getINVOICE_STATUS().equals("Unpaid")) {
+                    i.putExtra("dueDate", ((Sell_Unpaid) invoiceArrayList.get(position)).getDueDate());
+                }
                 startActivity(i);
+
             }
         };
 

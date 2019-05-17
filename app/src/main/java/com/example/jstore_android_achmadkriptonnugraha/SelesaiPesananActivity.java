@@ -21,97 +21,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SelesaiPesananActivity extends AppCompatActivity {
+public class SelesaiPesananActivity extends MainInvoiceActivity {
 
     private ImageView cancelTransaction;
     private ImageView finishTransaction ;
-    private ImageView logo;
-    private ImageView logo2;
-    private TextView textView3 ;
-    private TextView textView7;
-    private TextView textView4 ;
-    private TextView textView9 ;
-    private TextView textView11 ;
-    private TextView textView13 ;
-    private TextView textView14 ;
-    private TextView textView15 ;
-    private TextView textView17 ;
-
-    private TextView invoiceType ;
-    private TextView invoiceId ;
-    private TextView customerName ;
-    private TextView invoiceDate;
-    private TextView itemName ;
-    private TextView totalPrice;
-    private TextView dueDate;
-    private TextView installmentPeriod ;
-    private TextView status ;
-
-    private TableRow tableRow;
-    private TableLayout tableLayout;
-
-    private int currentUserId;
-    private String itemNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selesai_pesanan);
-
-          cancelTransaction = (ImageView) findViewById(R.id.cancel_button);
-          finishTransaction = (ImageView) findViewById(R.id.finish_button);
-          textView3 =  (TextView) findViewById(R.id.textView3);
-          textView7 = (TextView) findViewById(R.id.textView7);
-          textView4 = (TextView) findViewById(R.id.textView4);
-          textView9 =  (TextView)findViewById(R.id.textView9);
-          textView11 = (TextView)findViewById(R.id.textView11);
-          textView13 = (TextView)findViewById(R.id.textView13);
-          textView14 = (TextView)findViewById(R.id.textView14);
-          textView15 = (TextView)findViewById(R.id.textView15);
-          textView17 = (TextView)findViewById(R.id.textView17);
-          logo = findViewById(R.id.imageView4);
-          logo2 = findViewById(R.id.imageView6);
-
-          invoiceType = (TextView)findViewById(R.id.type_invoice);
-          invoiceId = (TextView)findViewById(R.id.id_invoice);
-          customerName = (TextView)findViewById(R.id.name_customer);
-          invoiceDate = (TextView)findViewById(R.id.date_invoice);
-          itemName = (TextView)findViewById(R.id.name_item);
-          totalPrice = (TextView)findViewById(R.id.price_total);
-          dueDate = (TextView)findViewById(R.id.date_due);
-          installmentPeriod = (TextView)findViewById(R.id.period_installment);
-          status = (TextView)findViewById(R.id.status_invoice);
-          tableRow = (TableRow) findViewById(R.id.tableRow);
-          tableLayout = (TableLayout) findViewById(R.id.tableLayout);
-
-        cancelTransaction.setVisibility(View.INVISIBLE);
-        finishTransaction.setVisibility(View.INVISIBLE);
-        textView3.setVisibility(View.INVISIBLE);
-        textView4.setVisibility(View.INVISIBLE);
-        textView7.setVisibility(View.INVISIBLE);
-        textView9.setVisibility(View.INVISIBLE);
-        textView11.setVisibility(View.INVISIBLE);
-        textView13.setVisibility(View.INVISIBLE);
-        textView14.setVisibility(View.INVISIBLE);
-        textView15.setVisibility(View.INVISIBLE);
-        textView17.setVisibility(View.INVISIBLE);
-        invoiceType.setVisibility(View.INVISIBLE);
-        invoiceId.setVisibility(View.INVISIBLE);
-        customerName.setVisibility(View.INVISIBLE);
-        invoiceDate.setVisibility(View.INVISIBLE);
-        itemName.setVisibility(View.INVISIBLE);
-        totalPrice.setVisibility(View.INVISIBLE);
-        dueDate.setVisibility(View.INVISIBLE);
-        installmentPeriod.setVisibility(View.INVISIBLE);
-        status.setVisibility(View.INVISIBLE);
-        tableLayout.setVisibility(View.INVISIBLE);
-        tableRow.setVisibility(View.INVISIBLE);
-        logo.setVisibility(View.INVISIBLE);
-        logo2.setVisibility(View.INVISIBLE);
-        currentUserId = getIntent().getExtras().getInt("id_customer");
-
-
-        fetchPesanan(currentUserId);
 
         cancelTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,10 +98,13 @@ public class SelesaiPesananActivity extends AppCompatActivity {
             }
         });
 
+        fetchPesanan(currentUserId);
+
     }
 
-    private void fetchPesanan(int id_customer)
-    {
+    @Override
+    protected void fetchPesanan(int id_customer) {
+        super.fetchPesanan(id_customer);
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -194,29 +114,8 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                         for (int i = 0; i < jsonResponse.length(); i++) {
                             JSONObject invoice = jsonResponse.getJSONObject(i);
                             JSONObject customer = invoice.getJSONObject("customer");
-                            cancelTransaction.setVisibility(View.VISIBLE);
-                            finishTransaction.setVisibility(View.VISIBLE);
-                            textView3.setVisibility(View.VISIBLE);
-                            textView4.setVisibility(View.VISIBLE);
-                            textView7.setVisibility(View.VISIBLE);
-                            textView9.setVisibility(View.VISIBLE);
-                            textView11.setVisibility(View.VISIBLE);
-                            textView13.setVisibility(View.VISIBLE);
 
-
-                            textView17.setVisibility(View.VISIBLE);
-                            invoiceType.setVisibility(View.VISIBLE);
-                            invoiceId.setVisibility(View.VISIBLE);
-                            customerName.setVisibility(View.VISIBLE);
-                            invoiceDate.setVisibility(View.VISIBLE);
-                            itemName.setVisibility(View.VISIBLE);
-                            totalPrice.setVisibility(View.VISIBLE);
-                            tableRow.setVisibility(View.VISIBLE);
-                            logo.setVisibility(View.VISIBLE);
-                            logo2.setVisibility(View.VISIBLE);
-
-                            status.setVisibility(View.VISIBLE);
-                            tableLayout.setVisibility(View.VISIBLE);
+                            showActivity();
 
                             invoiceType.setText(invoice.getString("invoiceType"));
                             invoiceDate.setText(invoice.getString("date"));
@@ -233,7 +132,7 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                                     installmentPeriod.setText(invoice.getString("installmentPeriod"));
                                 }
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
                             dueDate.setText(invoice.getString("dueDate"));
                             dueDate.setVisibility(View.VISIBLE);
@@ -242,40 +141,52 @@ public class SelesaiPesananActivity extends AppCompatActivity {
 
 
                     } catch (JSONException e) {
-
+                        e.printStackTrace();
                     }
                 }else{
                     backToMain();
-
                 }
             }
         };
 
         PesananFetchRequest m = new PesananFetchRequest(id_customer, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(SelesaiPesananActivity.this);
-
-
-        Response.Listener<String> responseListener2 = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try{
-                        JSONObject item = new JSONObject(response);
-
-                        itemName.setText(item.getString("name"));
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        ItemFromIDRequest it = new ItemFromIDRequest(id_customer, responseListener2);
-        queue.add(it);
         queue.add(m);
     }
 
-    private void backToMain(){
+    @Override
+    protected void backToMain() {
         Intent i = new Intent(SelesaiPesananActivity.this, MainActivity.class);
         i.putExtra("id_customer",currentUserId);
+        i.putExtra("name_customer", getIntent().getExtras().getString("name_customer"));
         startActivity(i);
+    }
+
+    @Override
+    protected void setLayout() {
+        setContentView(R.layout.activity_selesai_pesanan);
+
+        cancelTransaction = (ImageView) findViewById(R.id.cancel_button);
+        finishTransaction = (ImageView) findViewById(R.id.finish_button);
+
+        currentUserId = getIntent().getExtras().getInt("id_customer");
+    }
+
+    @Override
+    protected void hideActivity() {
+        super.hideActivity();
+        cancelTransaction.setVisibility(View.INVISIBLE);
+        finishTransaction.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void showActivity() {
+        super.showActivity();
+        cancelTransaction.setVisibility(View.VISIBLE);
+        finishTransaction.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected RequestQueue addRequestQueue() {
+        return Volley.newRequestQueue(SelesaiPesananActivity.this);
     }
 }

@@ -53,7 +53,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
 
         public InvoiceViewHolder(View itemView) {
             super(itemView);
-
+            itemView.setTag(this);
             itemView.setOnClickListener(listener);
 
             txtId =  itemView.findViewById(R.id.id_invoice);
